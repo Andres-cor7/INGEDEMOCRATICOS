@@ -5,7 +5,7 @@ export const POLITICOS = [
     apellido: 'Morales Sánchez',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 12 · Jalisco',
-    foto: require('../../assets/politico1.png'), // Tu imagen en assets
+    foto: require('../../assets/Dante.jpeg'), // Tu imagen en assets
     colorPrincipal: '#B8860B', // Dorado para este candidato
     propuestas: 'Transparencia y Oportunidades',
   },
@@ -15,7 +15,7 @@ export const POLITICOS = [
     apellido: 'García Ruiz',
     puesto: 'Candidata a Senadora',
     distrito: 'Distrito 5 · Chihuahua',
-    foto: require('../../assets/politico2.png'),
+    foto: require('../../assets/Ruben.jpeg'),
     colorPrincipal: '#1a5f7a', // Puedes variar los colores por candidato
     propuestas: 'Educación y Salud Digital',
   },
