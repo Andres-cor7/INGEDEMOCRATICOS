@@ -7,22 +7,26 @@ const { width } = Dimensions.get('window');
 const MenuNavegacion = ({ setSeccion, seccionActual }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => setSeccion('reels')} style={styles.button}>
+      
+      {/* 1. Home */}
+      <TouchableOpacity onPress={() => setSeccion('home')} style={styles.button}>
         <Ionicons 
-          name={seccionActual === 'reels' ? "home" : "home-outline"} 
+          name={seccionActual === 'home' ? "home" : "home-outline"} 
           size={26} 
-          color={seccionActual === 'reels' ? "#B8860B" : "#666"} 
+          color={seccionActual === 'home' ? "#B8860B" : "#666"} 
         /> 
       </TouchableOpacity>
       
-      <TouchableOpacity onPress={() => setSeccion('search')} style={styles.button}>
+      {/* 2. Reels (Icono estilo Instagram/Video) */}
+      <TouchableOpacity onPress={() => setSeccion('reels')} style={styles.button}>
         <Ionicons 
-          name="search" 
+          name={seccionActual === 'reels' ? "film" : "film-outline"} 
           size={26} 
-          color={seccionActual === 'search' ? "#B8860B" : "#666"} 
+          color={seccionActual === 'reels' ? "#B8860B" : "#666"} 
         />
       </TouchableOpacity>
 
+      {/* 3. Favoritos (Corazón en lugar de Buscar) */}
       <TouchableOpacity onPress={() => setSeccion('heart')} style={styles.button}>
         <Ionicons 
           name={seccionActual === 'heart' ? "heart" : "heart-outline"} 
@@ -31,6 +35,7 @@ const MenuNavegacion = ({ setSeccion, seccionActual }) => {
         />
       </TouchableOpacity>
 
+      {/* 4. Perfil */}
       <TouchableOpacity onPress={() => setSeccion('profile')} style={styles.button}>
         <Ionicons 
           name={seccionActual === 'profile' ? "person" : "person-outline"} 
@@ -38,6 +43,7 @@ const MenuNavegacion = ({ setSeccion, seccionActual }) => {
           color={seccionActual === 'profile' ? "#B8860B" : "#666"} 
         />
       </TouchableOpacity>
+
     </View>
   );
 };
@@ -47,21 +53,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: width,
-    height: 70, 
+    height: 75,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    zIndex: 9999, // FORZAR que esté arriba
-    elevation: 25, 
+    zIndex: 9999,
+    elevation: 25,
     borderTopWidth: 1,
     borderTopColor: '#EEE',
+    paddingBottom: 10,
+    // Sombra para que se vea premium
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
   },
   button: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
   }
 });
 

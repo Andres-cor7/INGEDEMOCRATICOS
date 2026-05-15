@@ -37,7 +37,7 @@ const TarjetaCandidato = ({ item }) => {
             onPress={() => setLiked(!liked)} 
             style={[
               styles.circleButton, 
-              liked ? { backgroundColor: '#ff4444' } : { backgroundColor: '#B8860B' }
+              liked ? { backgroundColor: '#ff4444' } : { backgroundColor: '#ffffff' }
             ]}
           >
             <Text style={{ fontSize: 20, color: '#FFF' }}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   nombre: { fontSize: 28, color: '#1a1a1a' },
   apellido: { fontSize: 32, fontWeight: 'bold', marginTop: -8 },
-  separator: { height: 2, backgroundColor: '#D4AF37', width: 50, marginVertical: 15 },
+  separator: { height: 2, backgroundColor: '#ffffff', width: 50, marginVertical: 15 },
   puestoText: { fontSize: 14, fontWeight: '700', color: '#666' },
   distritoText: { fontSize: 14, color: '#888' },
   seccionTitulo: { fontSize: 18, fontWeight: 'bold', marginTop: 15 },
