@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Dimensions, Text, TouchableOpacity, ScrollView } from 'react-native';
 import TarjetaCandidato from '../components/TarjetaCandidato';
 import MenuNavegacion from '../components/MenuNavegacion'; 
 import { POLITICOS } from '../data/datos';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const FeedScreen = () => {
-  // La app inicia en Home (primera sección)
   const [seccionActual, setSeccionActual] = useState('home');
+
+  // Componente interno para las tarjetas de Settings
+  const SettingCard = ({ titulo }) => (
+    <TouchableOpacity 
+      style={styles.settingCard}
+      onPress={() => console.log(`Navegando a: ${titulo}`)} // Aquí irá la navegación futura
+    >
+      <Text style={styles.settingText}>{titulo}</Text>
+      <Text style={styles.arrow}>›</Text>
+    </TouchableOpacity>
+  );
 
   const renderContenido = () => {
     switch (seccionActual) {
       case 'home':
         return (
           <View style={styles.center}>
-            <Text style={styles.text}>🏠 Bienvenido a la App</Text>
-            <Text style={styles.subText}>Selecciona el icono de Play para ver candidatos</Text>
+            <Text style={styles.titleText}>🏠 Bienvenido</Text>
           </View>
         );
       case 'reels':
@@ -32,17 +41,23 @@ const FeedScreen = () => {
             decelerationRate="fast"
           />
         );
-      case 'search':
+      case 'heart':
         return (
           <View style={styles.center}>
-            <Text style={styles.text}>🔍 Buscador de Candidatos</Text>
+            <Text style={styles.titleText}>❤️ Mis Favoritos</Text>
           </View>
         );
       case 'profile':
         return (
-          <View style={styles.center}>
-            <Text style={styles.text}>👤 Mi Perfil</Text>
-          </View>
+          <ScrollView style={styles.settingsContainer}>
+            <Text style={styles.headerTitle}>Configuración</Text>
+            {/* Las 5 tarjetas que pediste */}
+            <SettingCard titulo="Ubicación" />
+            <SettingCard titulo="Accesibilidad" />
+            <SettingCard titulo="Ruben & Sheinbawm forever ❤️" />
+            <SettingCard titulo="Soporte" />
+            <SettingCard titulo="Acerca de nosotros" />
+          </ScrollView>
         );
       default:
         return null;
@@ -54,8 +69,6 @@ const FeedScreen = () => {
       <View style={styles.contentArea}>
         {renderContenido()}
       </View>
-      
-      {/* Pasamos el estado al menú para que sepa cuál está activo */}
       <MenuNavegacion setSeccion={setSeccionActual} seccionActual={seccionActual} />
     </View>
   );
@@ -64,29 +77,58 @@ const FeedScreen = () => {
 const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#F8F9FA', // Un gris muy claro para que resalten las tarjetas blancas
   },
   contentArea: {
     flex: 1,
-    marginBottom: 70, // Espacio para que el menú no tape contenido
+    marginBottom: 75,
   },
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
   },
-  text: {
-    color: 'white',
+  titleText: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
+    color: '#1a1a1a',
   },
-  subText: {
-    color: '#888',
+  // ESTILOS DE SETTINGS
+  settingsContainer: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 60,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 25,
+    color: '#1a1a1a',
+  },
+  settingCard: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    marginBottom: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // Sombreado ligero
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  settingText: {
     fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
+    color: '#333',
+    fontWeight: '500',
+  },
+  arrow: {
+    fontSize: 22,
+    color: '#CCC',
   }
 });
 
