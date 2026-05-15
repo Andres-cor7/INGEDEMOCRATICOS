@@ -30,24 +30,29 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 0,
+    left: 0, // Aseguramos que empiece desde el borde izquierdo
+    right: 0, // Y llegue hasta el derecho
     width: width,
-    height: 85, // Un poco más alto para dispositivos modernos
+    height: 80, 
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    paddingBottom: 10,
+    
+    // ESTO ES LO QUE LO HARÁ APARECER:
+    zIndex: 9999, // Lo pone por encima de las tarjetas
+    elevation: 25, // Máxima prioridad de sombra en Android
+    
     borderTopWidth: 1,
     borderTopColor: '#EEE',
-    paddingBottom: 15, // Espacio para el "home indicator" del iPhone
-    elevation: 20, // Sombra en Android
-    shadowColor: '#000', // Sombra en iOS
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.2,
     shadowRadius: 5,
   },
   button: {
-    padding: 10,
+    padding: 15, // Área de toque más amplia
   }
 });
-
 export default MenuNavegacion;
