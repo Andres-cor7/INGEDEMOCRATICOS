@@ -4,23 +4,39 @@ import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 
-const MenuNavegacion = () => {
+const MenuNavegacion = ({ setSeccion, seccionActual }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
-        <Ionicons name="home" size={26} color="#B8860B" /> 
+      <TouchableOpacity onPress={() => setSeccion('reels')} style={styles.button}>
+        <Ionicons 
+          name={seccionActual === 'reels' ? "home" : "home-outline"} 
+          size={26} 
+          color={seccionActual === 'reels' ? "#B8860B" : "#666"} 
+        /> 
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.button}>
-        <Ionicons name="search" size={26} color="#666" />
+      <TouchableOpacity onPress={() => setSeccion('search')} style={styles.button}>
+        <Ionicons 
+          name="search" 
+          size={26} 
+          color={seccionActual === 'search' ? "#B8860B" : "#666"} 
+        />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Ionicons name="heart-outline" size={26} color="#666" />
+      <TouchableOpacity onPress={() => setSeccion('heart')} style={styles.button}>
+        <Ionicons 
+          name={seccionActual === 'heart' ? "heart" : "heart-outline"} 
+          size={26} 
+          color={seccionActual === 'heart' ? "#B8860B" : "#666"} 
+        />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Ionicons name="person-outline" size={26} color="#666" />
+      <TouchableOpacity onPress={() => setSeccion('profile')} style={styles.button}>
+        <Ionicons 
+          name={seccionActual === 'profile' ? "person" : "person-outline"} 
+          size={26} 
+          color={seccionActual === 'profile' ? "#B8860B" : "#666"} 
+        />
       </TouchableOpacity>
     </View>
   );
@@ -30,29 +46,23 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 0,
-    left: 0, // Aseguramos que empiece desde el borde izquierdo
-    right: 0, // Y llegue hasta el derecho
     width: width,
-    height: 80, 
+    height: 70, 
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    paddingBottom: 10,
-    
-    // ESTO ES LO QUE LO HARÁ APARECER:
-    zIndex: 9999, // Lo pone por encima de las tarjetas
-    elevation: 25, // Máxima prioridad de sombra en Android
-    
+    zIndex: 9999, // FORZAR que esté arriba
+    elevation: 25, 
     borderTopWidth: 1,
     borderTopColor: '#EEE',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
   },
   button: {
-    padding: 15, // Área de toque más amplia
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
   }
 });
+
 export default MenuNavegacion;
