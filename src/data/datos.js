@@ -7,7 +7,7 @@ export const POLITICOS = [
     apellido: 'Perez Cuellar',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 04',
-    foto: require('../../assets/Dante.jpeg'), 
+    foto: require('../../assets/telAviv.avif'), 
     colorPrincipal: '#8B0000', 
     propuestas: 'Desarrollo social y economico',
     
@@ -23,7 +23,7 @@ export const POLITICOS = [
     apellido: 'Lara Rocha',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 08',
-    foto: require('../../assets/Ruben.jpeg'),
+    foto: require('../../assets/robert.jpg'),
     colorPrincipal: '#1a5f7a', 
     propuestas: 'Agua y sustentabilidad',
     
@@ -39,7 +39,7 @@ export const POLITICOS = [
     apellido: 'Loya',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 08',
-    foto: require('../../assets/Ruben.jpeg'), 
+    foto: require('../../assets/loya.jpg'), 
     colorPrincipal: '#2E8B57', 
     propuestas: 'Desarrollo rural y agricultura',
     
@@ -55,7 +55,7 @@ export const POLITICOS = [
     apellido: 'Borruenda',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 06',
-    foto: require('../../assets/Dante.jpeg'), 
+    foto: require('../../assets/Carlos.jpg'), 
     colorPrincipal: '#B8860B', 
     propuestas: 'Educacion y tecnologia',
     
@@ -71,7 +71,7 @@ export const POLITICOS = [
     apellido: 'Quezada',
     puesto: 'Candidato a Diputado Federal',
     distrito: 'Distrito 08',
-    foto: require('../../assets/Ruben.jpeg'), 
+    foto: require('../../assets/Marco.jpg'), 
     colorPrincipal: '#8B0000', 
     propuestas: 'Seguridad y bienestar social',
     
