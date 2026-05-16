@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Dimensions, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-
-// CORRECCIÓN: Volvemos a importar los componentes y los datos que faltaban arriba
 import Swiper from 'react-native-deck-swiper';
-import TarjetaCandidato from '../components/TarjetaCandidato';
-import MenuNavegacion from '../components/MenuNavegacion'; 
-import { POLITICOS}  from '../data/datos'; // Importación directa sin llaves para evitar el error anterior
 
-const { height } = Dimensions.get('window');
+// COMPONENTES
+import HeaderSuperior from '../components/HeaderSuperior'; 
+import MenuNavegacion from '../components/MenuNavegacion'; 
+import TarjetaCandidato from '../components/TarjetaCandidato'; 
+import PantallaInicioContent from '../components/PantallaInicioContent'; 
+import DetallePoliticoScreen from '../screens/DetallePoliticoScreen'; // NUEVA PANTALLA
+
+// DATOS
+import { POLITICOS } from '../data/datos'; 
 
 const FeedScreen = () => {
   const [seccionActual, setSeccionActual] = useState('home');
   const [candidatosConLike, setCandidatosConLike] = useState([]);
+  
+  // NUEVO ESTADO: Maneja qué candidato estamos viendo a detalle
+  const [candidatoSeleccionado, setCandidatoSeleccionado] = useState(null);
 
-  // Al deslizar a la DERECHA en el Feed -> Agregamos a Favoritos (Like)
   const handleSwipeRight = (index) => {
     const candidato = politicosEnFeed[index];
     if (candidato && !candidatosConLike.includes(candidato.id)) {
@@ -23,16 +28,13 @@ const FeedScreen = () => {
     }
   };
 
-  // Función para remover de favoritos (ejecutada por el gesto horizontal)
   const removerDeLikes = (id) => {
     setCandidatosConLike((prevLikes) => prevLikes.filter(candidatoId => candidatoId !== id));
   };
 
-  // Filtros en tiempo real
   const politicosEnFeed = POLITICOS.filter(p => !candidatosConLike.includes(p.id));
   const politicosFavoritos = POLITICOS.filter(p => candidatosConLike.includes(p.id));
 
-  // Renderiza el fondo rojo con la palabra "Eliminar" al arrastrar la fila
   const renderRightActions = (id) => {
     return (
       <View style={styles.deleteBox}>
@@ -41,17 +43,30 @@ const FeedScreen = () => {
     );
   };
 
+  const SettingCard = ({ titulo }) => (
+    <TouchableOpacity style={styles.settingCard}>
+      <Text style={styles.settingText}>{titulo}</Text>
+      <Text style={styles.arrow}>›</Text>
+    </TouchableOpacity>
+  );
+
+  // Si hay un candidato seleccionado, mostramos la pantalla de detalles por encima de todo
+  if (candidatoSeleccionado) {
+    return (
+      <DetallePoliticoScreen 
+        politico={candidatoSeleccionado} 
+        onBack={() => setCandidatoSeleccionado(null)} 
+      />
+    );
+  }
+
   const renderContenido = () => {
     switch (seccionActual) {
       case 'home':
-        return (
-          <View style={styles.center}>
-            <Text style={styles.titleText}>🏠 Bienvenido</Text>
-          </View>
-        );
+        return <PantallaInicioContent />;
       case 'reels':
         return politicosEnFeed.length > 0 ? (
-          <View style={styles.swiperContainer}>
+          <View style={{ flex: 1, backgroundColor: '#fffcef' }}>
             <Swiper
               key={`feed-${politicosEnFeed.length}`}
               cards={politicosEnFeed} 
@@ -61,13 +76,18 @@ const FeedScreen = () => {
               }}
               onSwipedRight={(index) => handleSwipeRight(index)}
               cardIndex={0}
-              backgroundColor={'transparent'}
+              backgroundColor={'#fffcef'}
               stackSize={2} 
               stackScale={5}
               stackSeparation={15}
               disableBottomSwipe={true}
               disableTopSwipe={true}
               animateCardOpacity
+              cardWidth={Dimensions.get('window').width * 0.92}  
+              cardHeight={Dimensions.get('window').height * 0.60} 
+              marginTop={20} 
+              verticalMargin={0}
+              cardVerticalMargin={0}
             />
           </View>
         ) : (
@@ -80,7 +100,7 @@ const FeedScreen = () => {
         return politicosFavoritos.length > 0 ? (
           <View style={styles.likesContainer}>
             <Text style={styles.likesHeaderTitle}>Mis Candidatos ❤️</Text>
-            <Text style={styles.likesSubtitle}>Desliza una fila a la izquierda para quitar</Text>
+            <Text style={styles.likesSubtitle}>Desliza para quitar, toca para ver detalles</Text>
             
             <FlatList
               data={politicosFavoritos}
@@ -90,13 +110,16 @@ const FeedScreen = () => {
                 <Swipeable
                   renderRightActions={() => renderRightActions(item.id)}
                   onSwipeableOpen={(direction) => {
-                    if (direction === 'right') {
-                      removerDeLikes(item.id);
-                    }
+                    if (direction === 'right') removerDeLikes(item.id);
                   }}
                 >
                   <View style={styles.favoriteCardWrapper}>
-                    <TarjetaCandidato item={item} isFeedMode={false} />
+                    {/* AQUI PASAMOS LA FUNCION PARA ABRIR LOS DETALLES */}
+                    <TarjetaCandidato 
+                      item={item} 
+                      isFeedMode={false} 
+                      onVerDetalles={setCandidatoSeleccionado} 
+                    />
                   </View>
                 </Swipeable>
               )}
@@ -110,9 +133,14 @@ const FeedScreen = () => {
         );
       case 'profile':
         return (
-          <View style={styles.center}>
-            <Text style={styles.titleText}>👤 Mi Perfil</Text>
-          </View>
+          <ScrollView style={styles.settingsContainer} showsVerticalScrollIndicator={false}>
+            <Text style={styles.headerTitle}>Configuración</Text>
+            <SettingCard titulo="Ubicación" />
+            <SettingCard titulo="Accesibilidad" />
+            <SettingCard titulo="Soporte" />
+            <SettingCard titulo="Acerca de nosotros" />
+            <SettingCard titulo="Terminos y Condiciones" />
+          </ScrollView>
         );
       default:
         return null;
@@ -121,7 +149,9 @@ const FeedScreen = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.mainWrapper}>
+      {/* Fondo blanco dinámico para Inicio */}
+      <View style={[styles.mainWrapper, { backgroundColor: seccionActual === 'home' ? '#FFFFFF' : '#121212' }]}>
+        <HeaderSuperior />
         <View style={styles.contentArea}>
           {renderContenido()}
         </View>
@@ -132,38 +162,22 @@ const FeedScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  mainWrapper: { flex: 1, backgroundColor: '#121212' },
-  contentArea: { flex: 1, marginBottom: 75 },
-  swiperContainer: { flex: 1, marginTop: -40 }, 
+  mainWrapper: { flex: 1 },
+  contentArea: { flex: 1, marginTop: 90, marginBottom: 85 },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
-  titleText: { fontSize: 24, fontWeight: 'bold', color: 'white' },
   noDataText: { fontSize: 18, color: '#888', textAlign: 'center', fontWeight: '500' },
   subText: { fontSize: 14, color: '#666', marginTop: 10, textAlign: 'center' },
-  
-  likesContainer: { flex: 1, paddingTop: 50 },
+  likesContainer: { flex: 1, paddingTop: 15 },
   likesHeaderTitle: { fontSize: 26, fontWeight: 'bold', color: '#FFF', marginLeft: 20 },
   likesSubtitle: { fontSize: 13, color: '#555', marginLeft: 20, marginBottom: 15 },
-  favoriteCardWrapper: {
-    marginVertical: 5,
-    alignItems: 'center',
-  },
-  
-  deleteBox: {
-    backgroundColor: '#ff4444',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    width: Dimensions.get('window').width * 0.92,
-    alignSelf: 'center',
-    borderRadius: 18,
-    paddingRight: 20,
-    marginVertical: 5,
-    height: 79, 
-  },
-  deleteText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 15,
-  }
+  favoriteCardWrapper: { marginVertical: 5, alignItems: 'center' },
+  deleteBox: { backgroundColor: '#ff4444', justifyContent: 'center', alignItems: 'flex-end', width: Dimensions.get('window').width * 0.92, alignSelf: 'center', borderRadius: 18, paddingRight: 20, marginVertical: 5, height: 79 },
+  deleteText: { color: 'white', fontWeight: 'bold', fontSize: 15 },
+  settingsContainer: { flex: 1, paddingHorizontal: 20, paddingTop: 15 },
+  headerTitle: { fontSize: 28, fontWeight: 'bold', marginBottom: 25, color: '#FFF' },
+  settingCard: { backgroundColor: '#ffffff', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 15, marginBottom: 12, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', elevation: 3 },
+  settingText: { fontSize: 16, color: '#333', fontWeight: '500' },
+  arrow: { fontSize: 22, color: '#CCC' }
 });
 
 export default FeedScreen;

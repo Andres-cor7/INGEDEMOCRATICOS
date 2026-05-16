@@ -1,14 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
 
-const DetallePoliticoScreen = ({ route, navigation }) => {
-  const { politico } = route.params;
-
+// Cambiamos route/navigation por props directas (politico, onBack)
+const DetallePoliticoScreen = ({ politico, onBack }) => {
   return (
     <View style={styles.container}>
       {/* Barra superior para regresar */}
       <View style={styles.customHeader}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.backButton} onPress={onBack}>
           <Text style={styles.backButtonText}>← Volver</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Perfil Detallado</Text>
@@ -54,8 +53,8 @@ const DetallePoliticoScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#121212' },
-  customHeader: { flexDirection: 'row', alignItems: 'center', paddingTop: 20, paddingBottom: 15, paddingHorizontal: 20, backgroundColor: '#1a1a1a' },
-  backButton: { paddingVertical: 6, paddingHorizontal: 12, backgroundColor: '#333', borderRadius: 8 },
+  customHeader: { flexDirection: 'row', alignItems: 'center', paddingTop: 50, paddingBottom: 15, paddingHorizontal: 20, backgroundColor: '#1a1a1a' },
+  backButton: { paddingVertical: 8, paddingHorizontal: 15, backgroundColor: '#333', borderRadius: 8 },
   backButtonText: { color: '#FFF', fontWeight: 'bold', fontSize: 14 },
   headerTitle: { color: '#FFF', fontSize: 18, fontWeight: 'bold', marginLeft: 20 },
   scrollContent: { padding: 20, paddingBottom: 40 },
@@ -71,4 +70,3 @@ const styles = StyleSheet.create({
 });
 
 export default DetallePoliticoScreen;
-
