@@ -1,14 +1,23 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+// IMPORTANTE: Importamos el hook de navegación nativo
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
 const TarjetaCandidato = ({ item, isFeedMode }) => {
-  
-  // DISEÑO 1: Vista compacta y horizontal para cuando aparecen todos JUNTOS en LIKES
+  const navigation = useNavigation(); // Activamos el control de rutas
+
+  // Función al presionar la tarjeta
+  const manejarClicks = () => {
+    // Redirecciona a la pantalla "DetallePolítico" y le inyecta todo el objeto del candidato
+    navigation.navigate('DetallePolitico', { politico: item });
+  };
+
+  // DISEÑO 1: Vista compacta y horizontal para LIKES
   if (!isFeedMode) {
     return (
-      <View style={styles.miniCard}>
+      <TouchableOpacity style={styles.miniCard} onPress={manejarClicks} activeOpacity={0.8}>
         <Image source={item.foto} style={styles.miniImage} />
         <View style={styles.miniInfoContainer}>
           <Text style={styles.miniNombreCompleto} numberOfLines={1}>
@@ -19,13 +28,13 @@ const TarjetaCandidato = ({ item, isFeedMode }) => {
           </Text>
         </View>
         <Text style={styles.miniHeartText}>❤️</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 
-  // DISEÑO 2: Vista clásica grande y vertical para el FEED (Tinder)
+  // DISEÑO 2: Vista clásica grande y vertical para el FEED
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={manejarClicks} activeOpacity={0.95}>
       <Image source={item.foto} style={styles.image} />
       
       <View style={styles.actionRow}>
@@ -46,14 +55,13 @@ const TarjetaCandidato = ({ item, isFeedMode }) => {
         <Text style={styles.puestoText}>{item.puesto}</Text>
         <Text style={styles.distritoText}>{item.distrito}</Text>
         <Text style={styles.seccionTitulo}>✨ Propuestas</Text>
-        <Text style={styles.descripcion}>{item.propuestas}</Text>
+        <Text style={styles.descripcion} numberOfLines={3}>{item.propuestas}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  // ESTILOS TARJETA GRANDE (FEED)
   card: {
     width: width * 0.92,
     height: height * 0.76, 
@@ -61,6 +69,10 @@ const styles = StyleSheet.create({
     borderRadius: 30, 
     padding: 20,
     elevation: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
     alignSelf: 'center',
     position: 'relative',
   },
@@ -72,15 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 10,
   },
-  indicatorBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3,
-  },
+  indicatorBadge: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFF', justifyContent: 'center', alignItems: 'center', elevation: 3 },
   leftBadge: { borderWidth: 1, borderColor: 'rgba(255, 68, 68, 0.3)' },
   rightBadge: { borderWidth: 1, borderColor: 'rgba(184, 134, 11, 0.3)' },
   indicatorText: { fontSize: 16, fontWeight: 'bold', color: '#333' },
@@ -93,7 +97,6 @@ const styles = StyleSheet.create({
   seccionTitulo: { fontSize: 18, fontWeight: 'bold', marginTop: 15 },
   descripcion: { fontSize: 15, color: '#444', lineHeight: 20 },
 
-  // ESTILOS TARJETA HORIZONTAL (LIKES JUNTOS)
   miniCard: {
     flexDirection: 'row',
     backgroundColor: '#FDF9F1', 

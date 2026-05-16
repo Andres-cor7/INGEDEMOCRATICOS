@@ -1,23 +1,24 @@
-export const POLITICOS = [
+const POLITICOS = [
   {
     id: '1',
-    nombre: 'Luis Fernando',
-    apellido: 'Morales Sánchez',
-    puesto: 'Candidato a Diputado Federal',
-    distrito: 'Distrito 12 · Jalisco',
-    foto: require('../../assets/Dante.jpeg'), // Tu imagen en assets
-    colorPrincipal: '#B8860B', // Dorado para este candidato
-    propuestas: 'Transparencia y Oportunidades',
+    nombre: 'Marco',
+    apellido: 'Bonilla',
+    puesto: 'Alcalde de Chihuahua',
+    distrito: 'Municipio Chihuahua',
+    propuestas: '1. Mayor seguridad con más cámaras de vigilancia y drones.\n2. Pavimentación y bacheo intensivo en colonias del sur.\n3. Becas universitarias para jóvenes chihuahuenses.',
+    colorPrincipal: '#00529B',
+    foto: require('../../assets/icon.png'), // Reemplaza con tus imágenes reales en assets
   },
   {
     id: '2',
-    nombre: 'Ana María',
-    apellido: 'García Ruiz',
-    puesto: 'Candidata a Senadora',
-    distrito: 'Distrito 5 · Chihuahua',
-    foto: require('../../assets/Ruben.jpeg'),
-    colorPrincipal: '#1a5f7a', // Puedes variar los colores por candidato
-    propuestas: 'Educación y Salud Digital',
-  },
-  // Puedes seguir agregando más bloques así...
+    nombre: 'Cruz',
+    apellido: 'Pérez Cuéllar',
+    puesto: 'Alcalde de Ciudad Juárez',
+    distrito: 'Municipio Juárez',
+    propuestas: '1. Rehabilitación de parques y espacios públicos.\n2. Presupuesto participativo histórico para las colonias.\n3. Nuevas unidades de transporte y bacheo integral.',
+    colorPrincipal: '#800020',
+    foto: require('../../assets/icon.png'), 
+  }
 ];
+
+export default POLITICOS;

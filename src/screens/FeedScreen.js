@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-<<<<<<< Updated upstream
-import { StyleSheet, View, FlatList, Dimensions, Text } from 'react-native';
-=======
-import { StyleSheet, View, Dimensions, Text, FlatList, Animated } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, FlatList } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+// CORRECCIÓN: Volvemos a importar los componentes y los datos que faltaban arriba
 import Swiper from 'react-native-deck-swiper';
-import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
->>>>>>> Stashed changes
 import TarjetaCandidato from '../components/TarjetaCandidato';
 import MenuNavegacion from '../components/MenuNavegacion'; 
-import { POLITICOS } from '../data/datos';
+import POLITICOS from '../data/datos'; // Importación directa sin llaves para evitar el error anterior
 
 const { height } = Dimensions.get('window');
 
 const FeedScreen = () => {
-  // La app inicia en Home (primera sección)
   const [seccionActual, setSeccionActual] = useState('home');
   const [candidatosConLike, setCandidatosConLike] = useState([]);
 
-<<<<<<< Updated upstream
-=======
   // Al deslizar a la DERECHA en el Feed -> Agregamos a Favoritos (Like)
   const handleSwipeRight = (index) => {
     const candidato = politicosEnFeed[index];
@@ -45,14 +41,12 @@ const FeedScreen = () => {
     );
   };
 
->>>>>>> Stashed changes
   const renderContenido = () => {
     switch (seccionActual) {
       case 'home':
         return (
           <View style={styles.center}>
-            <Text style={styles.text}>🏠 Bienvenido a la App</Text>
-            <Text style={styles.subText}>Selecciona el icono de Play para ver candidatos</Text>
+            <Text style={styles.titleText}>🏠 Bienvenido</Text>
           </View>
         );
       case 'reels':
@@ -82,12 +76,6 @@ const FeedScreen = () => {
             <Text style={styles.subText}>Revisa tus seleccionados en la pestaña de Likes ❤️</Text>
           </View>
         );
-<<<<<<< Updated upstream
-      case 'search':
-        return (
-          <View style={styles.center}>
-            <Text style={styles.text}>🔍 Buscador de Candidatos</Text>
-=======
       case 'heart':
         return politicosFavoritos.length > 0 ? (
           <View style={styles.likesContainer}>
@@ -118,17 +106,12 @@ const FeedScreen = () => {
         ) : (
           <View style={styles.center}>
             <Text style={styles.noDataText}>❤️ Tus candidatos favoritos aparecerán aquí</Text>
->>>>>>> Stashed changes
           </View>
         );
       case 'profile':
         return (
           <View style={styles.center}>
-<<<<<<< Updated upstream
-            <Text style={styles.text}>👤 Mi Perfil</Text>
-=======
             <Text style={styles.titleText}>👤 Mi Perfil</Text>
->>>>>>> Stashed changes
           </View>
         );
       default:
@@ -137,7 +120,6 @@ const FeedScreen = () => {
   };
 
   return (
-    // GestureHandlerRootView es obligatorio para que los gestos de arrastre funcionen en Android/iOS
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={styles.mainWrapper}>
         <View style={styles.contentArea}>
@@ -145,45 +127,11 @@ const FeedScreen = () => {
         </View>
         <MenuNavegacion setSeccion={setSeccionActual} seccionActual={seccionActual} />
       </View>
-<<<<<<< Updated upstream
-      
-      {/* Pasamos el estado al menú para que sepa cuál está activo */}
-      <MenuNavegacion setSeccion={setSeccionActual} seccionActual={seccionActual} />
-    </View>
-=======
     </GestureHandlerRootView>
->>>>>>> Stashed changes
   );
 };
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
-  mainWrapper: {
-    flex: 1,
-    backgroundColor: '#121212',
-  },
-  contentArea: {
-    flex: 1,
-    marginBottom: 70, // Espacio para que el menú no tape contenido
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  text: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  subText: {
-    color: '#888',
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-=======
   mainWrapper: { flex: 1, backgroundColor: '#121212' },
   contentArea: { flex: 1, marginBottom: 75 },
   swiperContainer: { flex: 1, marginTop: -40 }, 
@@ -192,7 +140,6 @@ const styles = StyleSheet.create({
   noDataText: { fontSize: 18, color: '#888', textAlign: 'center', fontWeight: '500' },
   subText: { fontSize: 14, color: '#666', marginTop: 10, textAlign: 'center' },
   
-  // Contenedor de Likes Juntos
   likesContainer: { flex: 1, paddingTop: 50 },
   likesHeaderTitle: { fontSize: 26, fontWeight: 'bold', color: '#FFF', marginLeft: 20 },
   likesSubtitle: { fontSize: 13, color: '#555', marginLeft: 20, marginBottom: 15 },
@@ -201,7 +148,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   
-  // Fondo de eliminación al arrastrar
   deleteBox: {
     backgroundColor: '#ff4444',
     justifyContent: 'center',
@@ -211,13 +157,12 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     paddingRight: 20,
     marginVertical: 5,
-    height: 79, // Mismo alto exacto que la mini tarjeta para que calce perfecto
+    height: 79, 
   },
   deleteText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 15,
->>>>>>> Stashed changes
   }
 });
 
