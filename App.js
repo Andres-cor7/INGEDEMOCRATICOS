@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler'; // <--- ¡DEBE SER LA PRIMERÍSIMA LÍNEA!
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import FeedScreen from './src/screens/FeedScreen';
