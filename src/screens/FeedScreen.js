@@ -92,14 +92,14 @@ const FeedScreen = () => {
           </View>
         ) : (
           <View style={styles.center}>
-            <Text style={styles.noDataText}>🎉 ¡Has reaccionado a todos los candidatos!</Text>
-            <Text style={styles.subText}>Revisa tus seleccionados en la pestaña de Likes ❤️</Text>
+            <Text style={styles.noDataText}>¡Has reaccionado a todos los aspirantes!</Text>
+            <Text style={styles.subText}>Revisa tus seleccionados en la pestaña de guardados</Text>
           </View>
         );
       case 'heart':
         return politicosFavoritos.length > 0 ? (
           <View style={styles.likesContainer}>
-            <Text style={styles.likesHeaderTitle}>Mis Candidatos ❤️</Text>
+            <Text style={styles.likesHeaderTitle}>Mis Guardados</Text>
             <Text style={styles.likesSubtitle}>Desliza para quitar, toca para ver detalles</Text>
             
             <FlatList
