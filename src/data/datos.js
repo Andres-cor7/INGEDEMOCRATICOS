@@ -1,34 +1,84 @@
+// src/data/datos.js
+
 export const POLITICOS = [
   {
     id: '1',
-    nombre: 'Luis Fernando',
-    apellido: 'Morales Sánchez',
+    nombre: 'Alejandro',
+    apellido: 'Perez Cuellar',
     puesto: 'Candidato a Diputado Federal',
-    distrito: 'Distrito 12 · Jalisco',
+    distrito: 'Distrito 04',
     foto: require('../../assets/Dante.jpeg'), 
-    colorPrincipal: '#B8860B', 
-    propuestas: 'Transparencia y Oportunidades', // Esto se queda cortito para el Feed
-
+    colorPrincipal: '#8B0000', 
+    propuestas: 'Desarrollo social y economico',
+    
     // --- INFO EXTENDIDA PARA LA PANTALLA DE DETALLE ---
-    estudios: 'Licenciatura en Derecho y Maestría en Políticas Públicas',
-    biografia: 'Luis Fernando cuenta con más de 8 años trabajando en iniciativas ciudadanas enfocadas en la rendición de cuentas. Ha impulsado proyectos locales para la digitalización de trámites gubernamentales y la creación de observatorios ciudadanos.',
-    propuestasCompletas: '1. Transparencia Total: Auditorías en tiempo real accesibles desde una app móvil para vigilar el presupuesto del Distrito 12.\n2. Oportunidades para Jóvenes: Creación de un fondo de incubación regional para proyectos tecnológicos y de emprendimiento social.\n3. Parlamento Abierto: Canales digitales directos para votar leyes en conjunto con la ciudadanía.',
-    aprobacion: '78% de opiniones positivas en el mazo digital'
+    estudios: 'Licenciatura en Derecho',
+    biografia: 'Alejandro tiene amplia experiencia en la administración pública, enfocado en el desarrollo urbano y programas sociales.',
+    propuestasCompletas: '1. Apoyo a pequeñas empresas\n2. Mejora de espacios públicos\n3. Programas para jóvenes',
+    aprobacion: '75% de opiniones positivas'
   },
   {
     id: '2',
-    nombre: 'Ana María',
-    apellido: 'García Ruiz',
-    puesto: 'Candidata a Senadora',
-    distrito: 'Distrito 5 · Chihuahua',
+    nombre: 'Roberto',
+    apellido: 'Lara Rocha',
+    puesto: 'Candidato a Diputado Federal',
+    distrito: 'Distrito 08',
     foto: require('../../assets/Ruben.jpeg'),
     colorPrincipal: '#1a5f7a', 
-    propuestas: 'Educación y Salud Digital', // Esto se queda cortito para el Feed
-
+    propuestas: 'Agua y sustentabilidad',
+    
     // --- INFO EXTENDIDA PARA LA PANTALLA DE DETALLE ---
-    estudios: 'Ingeniería en Sistemas y Doctorado en Innovación Educativa (UACh)',
-    biografia: 'Orgullosamente chihuahuense, Ana María ha sido consultora de tecnología educativa para diversas universidades en el estado. Su meta es legislar para cerrar la brecha digital en las comunidades más alejadas de Chihuahua.',
-    propuestasCompletas: '1. Educación Conectada: Gestionar internet satelital gratuito para todas las escuelas rurales y serranas de Chihuahua.\n2. Salud Digital: Creación de la plataforma estatal de telemedicina para consultas especializadas sin salir de tu municipio.\n3. Tecnocracia Limpia: Capacitación digital obligatoria para agilizar el servicio en clínicas públicas.',
-    aprobacion: '82% de apoyo acumulado en Chihuahua'
+    estudios: 'Licenciatura en Derecho y Maestria en Administracion',
+    biografia: 'Conocido como "El Poncho", ha trabajado en la Junta Municipal de Agua y Saneamiento, impulsando proyectos de infraestructura hídrica.',
+    propuestasCompletas: '1. Modernizacion de la red de agua\n2. Energias limpias\n3. Proteccion al medio ambiente',
+    aprobacion: '80% de apoyo'
+  },
+  {
+    id: '3',
+    nombre: 'Baudelio',
+    apellido: 'Loya',
+    puesto: 'Candidato a Diputado Federal',
+    distrito: 'Distrito 08',
+    foto: require('../../assets/Ruben.jpeg'), 
+    colorPrincipal: '#2E8B57', 
+    propuestas: 'Desarrollo rural y agricultura',
+    
+    // --- INFO EXTENDIDA PARA LA PANTALLA DE DETALLE ---
+    estudios: 'Ingenieria Agronoma',
+    biografia: 'Baudelio es un fuerte defensor del sector primario en el estado, buscando mejores condiciones para los agricultores y ganaderos.',
+    propuestasCompletas: '1. Subsidios al campo\n2. Tecnificacion de riego\n3. Apoyo a la exportacion',
+    aprobacion: '68% de apoyo'
+  },
+  {
+    id: '4',
+    nombre: 'Carlos',
+    apellido: 'Borruenda',
+    puesto: 'Candidato a Diputado Federal',
+    distrito: 'Distrito 06',
+    foto: require('../../assets/Dante.jpeg'), 
+    colorPrincipal: '#B8860B', 
+    propuestas: 'Educacion y tecnologia',
+    
+    // --- INFO EXTENDIDA PARA LA PANTALLA DE DETALLE ---
+    estudios: 'Ingenieria en Sistemas y Maestria en Educacion',
+    biografia: 'Carlos propone una revolucion tecnologica en las escuelas publicas del estado para preparar a los jovenes para el futuro.',
+    propuestasCompletas: '1. Internet gratuito en escuelas\n2. Tablets para estudiantes\n3. Capacitacion docente',
+    aprobacion: '70% de apoyo'
+  },
+  {
+    id: '5',
+    nombre: 'Marco',
+    apellido: 'Quezada',
+    puesto: 'Candidato a Diputado Federal',
+    distrito: 'Distrito 08',
+    foto: require('../../assets/Ruben.jpeg'), 
+    colorPrincipal: '#8B0000', 
+    propuestas: 'Seguridad y bienestar social',
+    
+    // --- INFO EXTENDIDA PARA LA PANTALLA DE DETALLE ---
+    estudios: 'Licenciatura en Derecho',
+    biografia: 'Ex alcalde de Chihuahua, Marco Quezada cuenta con experiencia en el manejo de crisis y desarrollo de programas comunitarios.',
+    propuestasCompletas: '1. Policia de proximidad\n2. Centros comunitarios\n3. Apoyo a madres solteras',
+    aprobacion: '85% de apoyo'
   }
 ];

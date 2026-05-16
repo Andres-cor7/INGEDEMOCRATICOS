@@ -3,38 +3,38 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 
 const PantallaInicioContent = () => {
-  // Datos simulados para los candidatos destacados
+  // Datos reales basados en tu archivo datos.js
   const candidatosDestacados = [
-    { id: '1', nombre: 'Luis Fernando', foto: require('../../assets/Dante.jpeg') },
-    { id: '2', nombre: 'Claudia S.', foto: require('../../assets/Ruben.jpeg') },
-    { id: '3', nombre: 'Rubén M.', foto: require('../../assets/Ruben.jpeg') }
+    { id: '1', nombre: 'Alejandro P.', foto: require('../../assets/Dante.jpeg') }, 
+    { id: '2', nombre: 'Roberto Lara', foto: require('../../assets/Ruben.jpeg') },
+    { id: '5', nombre: 'Marco Quezada', foto: require('../../assets/Ruben.jpeg') }
   ];
 
-  // Sección: Diccionario/Información de puestos
+  // Información institucional de puestos sin emojis
   const informacionPuestos = [
     { 
       id: '1', 
       titulo: 'Presidencia Municipal', 
       icono: 'business', 
-      desc: 'Se encarga de los servicios básicos de tu ciudad: alumbrado público, baches, recolección de basura y policía preventiva.' 
+      desc: 'Se encarga de los servicios básicos de la ciudad: alumbrado público, baches, recolección de basura y policía preventiva.' 
     },
     { 
       id: '2', 
-      titulo: 'Diputación (Local/Federal)', 
+      titulo: 'Diputación Federal', 
       icono: 'book', 
-      desc: 'Crea, modifica y elimina leyes. También son los encargados de aprobar en qué se gasta el dinero público (presupuesto).' 
+      desc: 'Crea, modifica y elimina leyes a nivel nacional. Aprueban en qué se gasta el presupuesto del país.' 
     },
     { 
       id: '3', 
       titulo: 'Senaduría', 
       icono: 'globe', 
-      desc: 'Representa a tu estado a nivel nacional. Aprueban tratados internacionales y vigilan la política exterior del país.' 
+      desc: 'Representa al estado a nivel nacional. Aprueban tratados internacionales y vigilan la política exterior.' 
     },
     { 
       id: '4', 
       titulo: 'Gubernatura', 
       icono: 'map', 
-      desc: 'Administra todo el estado. Coordina grandes obras de infraestructura, hospitales estatales y la seguridad pública a nivel estatal.' 
+      desc: 'Administra el estado. Coordina obras de infraestructura, hospitales estatales y la seguridad pública.' 
     }
   ];
 
@@ -43,7 +43,7 @@ const PantallaInicioContent = () => {
       {/* Bienvenida */}
       <View style={styles.header}>
         <Text style={styles.bienvenida}>Hola, Ciudadano</Text>
-        <Text style={styles.subtitulo}>Conoce las propuestas para el ITESM y Chihuahua</Text>
+        <Text style={styles.subtitulo}>Conoce las propuestas para el Estado de Chihuahua</Text>
       </View>
 
       {/* Buscador Visual */}
@@ -52,8 +52,8 @@ const PantallaInicioContent = () => {
         <Text style={styles.searchText}>Busca por candidato o distrito...</Text>
       </TouchableOpacity>
 
-      {/* Candidatos Destacados */}
-      <Text style={styles.seccionTitulo}>✨ Candidatos Destacados</Text>
+      {/* Candidatos Destacados Reales */}
+      <Text style={styles.seccionTitulo}>Candidatos Destacados</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.featuredList}>
         {candidatosDestacados.map(candidato => (
           <TouchableOpacity key={candidato.id} style={styles.featuredItem}>
@@ -63,13 +63,14 @@ const PantallaInicioContent = () => {
         ))}
       </ScrollView>
 
-      {/* Próximas Elecciones */}
-      <Text style={styles.seccionTitulo}>📅 Próximas Elecciones ITESM</Text>
+      {/* Próximas Elecciones Reales (2027) */}
+      <Text style={styles.seccionTitulo}>Próximas Elecciones en Chihuahua</Text>
+      
       <View style={styles.electionCard}>
         <View style={styles.goldSeparator}></View>
         <View style={styles.electionInfo}>
-          <Text style={styles.electionTitle}>Diputación Federal</Text>
-          <Text style={styles.electionDate}>Junio 2024 · Chihuahua</Text>
+          <Text style={styles.electionTitle}>Elecciones Federales Intermedias</Text>
+          <Text style={styles.electionDate}>Junio 2027 · Diputaciones Federales</Text>
         </View>
         <Ionicons name="chevron-forward" size={24} color="#B8860B" />
       </View>
@@ -77,14 +78,14 @@ const PantallaInicioContent = () => {
       <View style={styles.electionCard}>
         <View style={styles.goldSeparator}></View>
         <View style={styles.electionInfo}>
-          <Text style={styles.electionTitle}>Presidencia Municipal</Text>
-          <Text style={styles.electionDate}>Junio 2024 · Cd. Chihuahua</Text>
+          <Text style={styles.electionTitle}>Elecciones Estatales Locales</Text>
+          <Text style={styles.electionDate}>Junio 2027 · Gubernatura y Alcaldías</Text>
         </View>
         <Ionicons name="chevron-forward" size={24} color="#B8860B" />
       </View>
 
       {/* SECCIÓN: Información de Puestos */}
-      <Text style={styles.seccionTitulo}>📖 ¿Qué hace cada puesto?</Text>
+      <Text style={styles.seccionTitulo}>¿Qué hace cada puesto?</Text>
       {informacionPuestos.map(puesto => (
         <View key={puesto.id} style={styles.infoCard}>
           <View style={styles.iconContainer}>
@@ -163,8 +164,6 @@ const styles = StyleSheet.create({
     color: '#444',
     textAlign: 'center',
   },
-  
-  // Estilos de las Tarjetas de Elecciones
   electionCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -198,8 +197,6 @@ const styles = StyleSheet.create({
     color: '#888',
     marginTop: 2,
   },
-
-  // ESTILOS: Tarjetas de Información de Puestos
   infoCard: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
