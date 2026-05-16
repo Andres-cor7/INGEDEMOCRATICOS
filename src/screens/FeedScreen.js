@@ -7,7 +7,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Swiper from 'react-native-deck-swiper';
 import TarjetaCandidato from '../components/TarjetaCandidato';
 import MenuNavegacion from '../components/MenuNavegacion'; 
-import POLITICOS from '../data/datos'; // Importación directa sin llaves para evitar el error anterior
+import { POLITICOS}  from '../data/datos'; // Importación directa sin llaves para evitar el error anterior
 
 const { height } = Dimensions.get('window');
 
