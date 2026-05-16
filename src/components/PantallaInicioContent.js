@@ -1,13 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const PantallaInicioContent = () => {
-  // Datos reales basados en tu archivo datos.js
-  const candidatosDestacados = [
-    { id: '1', nombre: 'Alejandro P.', foto: require('../../assets/Dante.jpeg') }, 
-    { id: '2', nombre: 'Roberto Lara', foto: require('../../assets/Ruben.jpeg') },
-    { id: '5', nombre: 'Marco Quezada', foto: require('../../assets/Ruben.jpeg') }
+  // Nueva sección neutral de utilidad general para sustituir los destacados
+  const guiaCiudadana = [
+    { 
+      id: '1', 
+      titulo: 'Verificación de Credencial', 
+      icono: 'card', 
+      desc: 'Consulta la vigencia de tu credencial para votar (INE) con anticipación para asegurar tu derecho a participar.' 
+    },
+    { 
+      id: '2', 
+      titulo: 'Ubicación de Casilla', 
+      icono: 'location', 
+      desc: 'Localiza el centro de votación asignado a tu sección electoral mediante los sistemas oficiales previo al día de la elección.' 
+    },
+    { 
+      id: '3', 
+      titulo: 'Análisis de Plataformas', 
+      icono: 'analytics', 
+      desc: 'Utiliza las herramientas digitales para contrastar y evaluar de manera objetiva los planes de trabajo de cada candidatura.' 
+    }
   ];
 
   // Información institucional de puestos sin emojis
@@ -52,16 +67,19 @@ const PantallaInicioContent = () => {
         <Text style={styles.searchText}>Busca por candidato o distrito...</Text>
       </TouchableOpacity>
 
-      {/* Candidatos Destacados Reales */}
-      <Text style={styles.seccionTitulo}>Candidatos Destacados</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.featuredList}>
-        {candidatosDestacados.map(candidato => (
-          <TouchableOpacity key={candidato.id} style={styles.featuredItem}>
-            <Image source={candidato.foto} style={styles.featuredImage} />
-            <Text style={styles.featuredName}>{candidato.nombre}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      {/* NUEVA SECCIÓN: Guía Ciudadana (Sustituye de forma neutral a Candidatos Destacados) */}
+      <Text style={styles.seccionTitulo}>Guía para el Voto Informado</Text>
+      {guiaCiudadana.map(paso => (
+        <View key={paso.id} style={styles.infoCard}>
+          <View style={styles.iconContainer}>
+            <Ionicons name={paso.icono} size={24} color="#B8860B" />
+          </View>
+          <View style={styles.infoTextContainer}>
+            <Text style={styles.infoTitle}>{paso.titulo}</Text>
+            <Text style={styles.infoDesc}>{paso.desc}</Text>
+          </View>
+        </View>
+      ))}
 
       {/* Próximas Elecciones Reales (2027) */}
       <Text style={styles.seccionTitulo}>Próximas Elecciones en Chihuahua</Text>
@@ -98,7 +116,7 @@ const PantallaInicioContent = () => {
         </View>
       ))}
 
-      {/* Espacio final para que el scroll no quede tapado por el menú inferior */}
+      {/* Espacio final para evitar superposiciones con el menú inferior */}
       <View style={{ height: 120 }}></View>
     </ScrollView>
   );
@@ -142,27 +160,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1a1a1a',
     marginVertical: 15,
-  },
-  featuredList: {
-    flexDirection: 'row',
-    marginBottom: 10, 
-  },
-  featuredItem: {
-    alignItems: 'center',
-    marginRight: 20,
-  },
-  featuredImage: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
-    borderWidth: 2,
-    borderColor: '#D4AF37',
-  },
-  featuredName: {
-    fontSize: 12,
-    marginTop: 8,
-    color: '#444',
-    textAlign: 'center',
   },
   electionCard: {
     flexDirection: 'row',
