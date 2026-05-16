@@ -19,5 +19,14 @@ export const POLITICOS = [
     colorPrincipal: '#1a5f7a', // Puedes variar los colores por candidato
     propuestas: 'Educación y Salud Digital',
   },
-  // Puedes seguir agregando más bloques así...
+  {
+    id: '3',
+    nombre: 'Carlos Eduardo',
+    apellido: 'Hernández López',
+    puesto: 'Candidato a Diputado Local',
+    distrito: 'Distrito 8 · Nuevo León',
+    foto: require('../../assets/Gael.jpeg'),
+    colorPrincipal: '#4682b4', // Azul para este candidato
+    propuestas: 'Desarrollo Sostenible y Economía Circular',
+  }
 ];

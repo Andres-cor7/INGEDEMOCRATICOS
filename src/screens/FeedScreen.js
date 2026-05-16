@@ -12,13 +12,10 @@ import PantallaInicioContent from '../components/PantallaInicioContent';
 // DATOS
 import { POLITICOS } from '../data/datos';
 
-const { height } = Dimensions.get('window');
-
 const FeedScreen = () => {
   const [seccionActual, setSeccionActual] = useState('home');
   const [candidatosConLike, setCandidatosConLike] = useState([]);
 
-  // Al deslizar a la DERECHA en el Feed -> Agregamos a Favoritos (Like)
   const handleSwipeRight = (index) => {
     const candidato = politicosEnFeed[index];
     if (candidato && !candidatosConLike.includes(candidato.id)) {
@@ -26,16 +23,13 @@ const FeedScreen = () => {
     }
   };
 
-  // Función para remover de favoritos (gesto horizontal en lista)
   const removerDeLikes = (id) => {
     setCandidatosConLike((prevLikes) => prevLikes.filter(candidatoId => candidatoId !== id));
   };
 
-  // Filtros en tiempo real cruzados de bases de datos
   const politicosEnFeed = POLITICOS.filter(p => !candidatosConLike.includes(p.id));
   const politicosFavoritos = POLITICOS.filter(p => candidatosConLike.includes(p.id));
 
-  // Renderiza el fondo rojo con la palabra "Eliminar" al arrastrar hacia la izquierda
   const renderRightActions = () => {
     return (
       <View style={styles.deleteBox}>
@@ -44,7 +38,6 @@ const FeedScreen = () => {
     );
   };
 
-  // Componente interno para las tarjetas de Settings
   const SettingCard = ({ titulo }) => (
     <TouchableOpacity 
       style={styles.settingCard}
@@ -56,7 +49,6 @@ const FeedScreen = () => {
   );
 
   const renderContenido = () => {
-    // --- AQUÍ SE ABRE EL SWITCH CORRECTAMENTE ---
     switch (seccionActual) {
       case 'home':
         return <PantallaInicioContent />;
@@ -81,13 +73,15 @@ const FeedScreen = () => {
               disableTopSwipe={true}
               animateCardOpacity
               
-              // --- CONFIGURACIÓN DE GEOMETRÍA NATIVA ---
+              // ============================================
+              // SOLUCIÓN AGRESIVA DE GEOMETRÍA
+              // Obligamos a la tarjeta a ser más pequeña y estar más arriba
+              // ============================================
               cardWidth={Dimensions.get('window').width * 0.92}  
-              cardHeight={Dimensions.get('window').height * 0.62} 
+              cardHeight={Dimensions.get('window').height * 0.60} // <--- Reducido considerablemente para que quepa bien
               
-              // Centrado vertical nativo exacto calculando los menús fijos
-              marginTop={(Dimensions.get('window').height - 165 - (Dimensions.get('window').height * 0.62)) / 2 - 45}
-              verticalMargin={0}
+              marginTop={20} // <--- Pequeño margen superior fijo
+              verticalMargin={0} // No usamos márgenes calculados por Swiper
               cardVerticalMargin={0}
             />
           </View>
@@ -146,28 +140,30 @@ const FeedScreen = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.mainWrapper}>
-        {/* HEADER FIJO EN EL TOP */}
+      <View style={[styles.mainWrapper, { backgroundColor: seccionActual === 'home' ? '#FFFFFF' : '#121212' }]}>
+        
+        {/* Header Fijo */}
         <HeaderSuperior />
 
-        {/* CONTENIDO CAMBIANTE SEGÚN LA SECCIÓN */}
+        {/* Contenido Cambiante */}
         <View style={styles.contentArea}>
           {renderContenido()}
         </View>
         
-        {/* MENÚ INFERIOR FIJO */}
+        {/* Menú Inferior Fijo (Debe estar al final para estar arriba en render) */}
         <MenuNavegacion setSeccion={setSeccionActual} seccionActual={seccionActual} />
+
       </View>
     </GestureHandlerRootView>
   );
 };
 
 const styles = StyleSheet.create({
-  mainWrapper: { flex: 1, backgroundColor: '#121212' },
+  mainWrapper: { flex: 1 },
   contentArea: { 
     flex: 1, 
-    marginTop: 90,  
-    marginBottom: 75 
+    marginTop: 90,  // Header height
+    marginBottom: 85 // <--- Aumentado de 75 a 85 para contener agresivamente la tarjeta Swiper
   },
   center: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
   noDataText: { fontSize: 18, color: '#888', textAlign: 'center', fontWeight: '500' },
