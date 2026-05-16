@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, Alert } fr
 
 const { width, height } = Dimensions.get('window');
 
+const MARGEN_SIMETRICO = width * .04; // 4% de margen a cada lado
 const TarjetaCandidato = ({ item }) => {
   const [liked, setLiked] = useState(false);
 
@@ -61,18 +62,24 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: width,
     height: height,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#121212', 
+    backgroundColor: '#fffcef', 
+
   },
   card: {
     width: width * 0.92,
-    height: height * 0.82,
-    backgroundColor: '#FDF9F1', 
+    height: height * 0.78,
+    backgroundColor: '#fffae8', 
     borderRadius: 30, 
     padding: 20,
     elevation: 10,
     position: 'relative', 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    marginTop: MARGEN_SIMETRICO,
+    marginBottom: MARGEN_SIMETRICO,
   },
   image: {
     width: '100%',
