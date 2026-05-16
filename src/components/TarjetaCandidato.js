@@ -3,14 +3,12 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity, Alert } fr
 
 const { width } = Dimensions.get('window');
 
-// Agregamos la prop "onVerDetalles"
 const TarjetaCandidato = ({ item, isFeedMode, onVerDetalles }) => {
   const [liked, setLiked] = useState(false);
 
   // DISEÑO 1: Vista compacta (Sección de LIKES)
   if (!isFeedMode) {
     return (
-      // Cambiamos View por TouchableOpacity para que se pueda clickear
       <TouchableOpacity 
         style={styles.miniCard} 
         activeOpacity={0.7}
@@ -34,10 +32,19 @@ const TarjetaCandidato = ({ item, isFeedMode, onVerDetalles }) => {
   return (
     <View style={styles.card}>
       <Image source={item.foto} style={[styles.image, { height: '35%' }]} />
+      
+      {/* SECCIÓN DE BADGES CON FLECHAS DE DIRECCIÓN */}
       <View style={styles.actionRow}>
-        <View style={[styles.indicatorBadge, styles.leftBadge]}><Text style={styles.indicatorText}>✕</Text></View>
-        <View style={[styles.indicatorBadge, styles.rightBadge]}><Text style={styles.indicatorText}>❤️</Text></View>
+        {/* Flecha Izquierda + Tacha (Descartar) */}
+        <View style={[styles.indicatorBadge, styles.leftBadge]}>
+          <Text style={styles.indicatorText}>← ✕</Text>
+        </View>
+        {/* Corazón + Flecha Derecha (Guardar) */}
+        <View style={[styles.indicatorBadge, styles.rightBadge]}>
+          <Text style={styles.indicatorText}>❤️ →</Text>
+        </View>
       </View>
+
       <View style={styles.infoContainer}>
         <Text style={[styles.nombre, { fontSize: 24 }]}>{item.nombre}</Text>
         <Text style={[styles.apellido, { fontSize: 28, color: item.colorPrincipal || '#B8860B' }]}>{item.apellido}</Text>
@@ -47,6 +54,7 @@ const TarjetaCandidato = ({ item, isFeedMode, onVerDetalles }) => {
         <Text style={[styles.seccionTitulo, { marginTop: 10 }]}>✨ Propuestas</Text>
         <Text style={styles.descripcion} numberOfLines={7}>{item.propuestas}</Text>
       </View>
+
       <View style={styles.floatingButtons}>
         <TouchableOpacity style={styles.circleButton} onPress={() => Alert.alert("Candidato descartado")}><Text style={{ fontSize: 20 }}>✕</Text></TouchableOpacity>
         <TouchableOpacity activeOpacity={0.7} onPress={() => setLiked(!liked)} style={[styles.circleButton, liked ? { backgroundColor: '#ff4444' } : { backgroundColor: '#ffffff' }]}><Text style={{ fontSize: 20, color: liked ? '#FFF' : '#333' }}>{liked ? '❤️' : '♥'}</Text></TouchableOpacity>
@@ -60,10 +68,13 @@ const styles = StyleSheet.create({
   card: { width: '100%', height: '100%', backgroundColor: '#fffae8', borderRadius: 30, padding: 20, elevation: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, overflow: 'hidden' },
   image: { width: '100%', borderRadius: 20, marginBottom: 8 },
   actionRow: { flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 8, paddingHorizontal: 10 },
-  indicatorBadge: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#FFF', justifyContent: 'center', alignItems: 'center', elevation: 3 },
+  
+  // Ajustamos el tamaño de las badges para que quepan bien las flechas
+  indicatorBadge: { paddingHorizontal: 10, height: 32, borderRadius: 16, backgroundColor: '#FFF', justifyContent: 'center', alignItems: 'center', elevation: 3 },
+  
   leftBadge: { borderWidth: 1, borderColor: 'rgba(255, 68, 68, 0.3)' },
   rightBadge: { borderWidth: 1, borderColor: 'rgba(184, 134, 11, 0.3)' },
-  indicatorText: { fontSize: 12, fontWeight: 'bold', color: '#333' },
+  indicatorText: { fontSize: 13, fontWeight: 'bold', color: '#333' },
   infoContainer: { flex: 1, zIndex: 1 },
   nombre: { color: '#1a1a1a' },
   apellido: { fontWeight: 'bold', marginTop: -8 },
